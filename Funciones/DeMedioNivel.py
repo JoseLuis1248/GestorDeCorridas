@@ -131,35 +131,39 @@ def encabezadoArchivoPreparado(txt):
     m.write(r)
     m.close()
 
-def cuerpoArchivoPreparado(confGeneral, confPreparadoVersEst, txt):
+def cuerpoArchivoPreparado(confGeneral, confPreparadoVersEst, txt, nroMaquina):
     m = open(txt, "at")
     n = len(confPreparadoVersEst)
+
     for i in range(n):
-        if(confPreparadoVersEst[i][1] == "1" or confPreparadoVersEst[i][2] == "1"):
-            if(confPreparadoVersEst[i][5] == "1"):
-                bases = confGeneral[13]
-                ejec = confGeneral[14]
-            elif(confPreparadoVersEst[i][5] == "2"):
-                bases = confGeneral[15]
-                ejec = confGeneral[16]
-            r = 'echo --------------------------------------------------------\n' + \
-                'echo SE PREPARARA EL ENTORNO EN MAQUINA DE IP TERMINACION {}\n'.format(confPreparadoVersEst[i][0]) + \
+        if(confPreparadoVersEst[i][0] == nroMaquina):
+            break;
+
+    if(confPreparadoVersEst[i][1] == "1" or confPreparadoVersEst[i][2] == "1"):
+        if(confPreparadoVersEst[i][5] == "1"):
+            bases = confGeneral[13]
+            ejec = confGeneral[14]
+        elif(confPreparadoVersEst[i][5] == "2"):
+            bases = confGeneral[15]
+            ejec = confGeneral[16]
+        r = 'echo --------------------------------------------------------\n' + \
+            'echo SE PREPARARA EL ENTORNO EN MAQUINA DE IP TERMINACION {}\n'.format(confPreparadoVersEst[i][0]) + \
+            '\n'
+        if(confPreparadoVersEst[i][1] == "1"):
+            b = 'echo SE COPIARAN LAS BASES DE DATOS\n' + \
+                'timeout 2 /nobreak\n' + \
+                'XCOPY "{}*" "{}" /f /q /y\n'.format(bases, confPreparadoVersEst[i][3]) + \
                 '\n'
-            if(confPreparadoVersEst[i][1] == "1"):
-                b = 'echo SE COPIARAN LAS BASES DE DATOS\n' + \
-                    'timeout 2 /nobreak\n' + \
-                    'XCOPY "{}*" "{}" /f /q /y\n'.format(bases, confPreparadoVersEst[i][3]) + \
-                    '\n'
-                r += b
-            if(confPreparadoVersEst[i][2] == "1"):
-                e = 'echo SE COPIARA EJECUTABLE DE TESTEO\n' + \
-                    'timeout 2 /nobreak\n' + \
-                    'XCOPY "{}*" "{}" /f /q /y\n'.format(ejec, confPreparadoVersEst[i][4]) + \
-                    'echo --------------------------------------------------------\n' + \
-                    '\n'
-            else:
-                e = 'echo --------------------------------------------------------\n' + \
-                    '\n'
-            r += e
-            m.write(r)
+            r += b
+        if(confPreparadoVersEst[i][2] == "1"):
+            e = 'echo SE COPIARA EJECUTABLE DE TESTEO\n' + \
+                'timeout 2 /nobreak\n' + \
+                'XCOPY "{}*" "{}" /f /q /y\n'.format(ejec, confPreparadoVersEst[i][4]) + \
+                'echo --------------------------------------------------------\n' + \
+                '\n'
+        else:
+            e = 'echo --------------------------------------------------------\n' + \
+                '\n'
+        r += e
+        m.write(r)
     m.close()
