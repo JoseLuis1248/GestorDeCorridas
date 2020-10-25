@@ -51,10 +51,10 @@ def main():
             generarArchivoDePreparadoPorVersion(confGeneral, confPreparadoVersEst2, listaMaquinas)
         elif(opcion == 3):
             for i in range(len(listaMaquinas)):
-                generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst1, listaMaquinas[i])
+                generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst1, listaMaquinas[i], confPreparadoVersEst1)
         elif(opcion == 4):
             for i in range(len(listaMaquinas)):
-                generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst2, listaMaquinas[i])
+                generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst2, listaMaquinas[i], confPreparadoVersEst2)
         elif(opcion == 5):
             listaDeMaquinas = input("Ingrese la lista de maquinas a preparar (separadas por coma, si espacios): ")
             listaFormateada = obtenerInfoSeparadaPorComa(listaDeMaquinas)
@@ -67,12 +67,12 @@ def main():
             listaDeMaquinas = input("Ingrese la lista de maquinas a configurar ejecucion en serie (separadas por coma, si espacios): ")
             listaFormateada = obtenerInfoSeparadaPorComa(listaDeMaquinas)
             for i in range(len(listaFormateada)):
-                generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst1, listaFormateada[i])
+                generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst1, listaFormateada[i], confPreparadoVersEst1)
         elif(opcion == 8):
             listaDeMaquinas = input("Ingrese la lista de maquinas a configurar ejecucion en serie (separadas por coma, si espacios): ")
             listaFormateada = obtenerInfoSeparadaPorComa(listaDeMaquinas)
             for i in range(len(listaFormateada)):
-                generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst2, listaFormateada[i])
+                generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst2, listaFormateada[i], confPreparadoVersEst2)
 
 if __name__ == '__main__':
     main()

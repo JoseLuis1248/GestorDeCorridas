@@ -4,7 +4,7 @@
 
 from Funciones.DeMedioNivel import *
 
-def generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst, nroMaquina):
+def generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst, nroMaquina, confPreparadoVersEst):
     """
     Ésta función genera y exporta un archivo por lotes de ejecucion de proyectos, correspondiente a una version estable
     :param confGeneral: Arreglo de información con la configuración general
@@ -16,7 +16,12 @@ def generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst, nroMa
         version = confGeneral[17]
     else:
         version = confGeneral[18]
-    txt = "Exportacion/EjecucionEnSerie({})({}).txt".format(nroMaquina, version)
+    indice = 0
+    for i in range(len(confPreparadoVersEst)):
+        if(nroMaquina == confPreparadoVersEst[i][0]):
+            indice = i
+            break
+    txt = "{}\EjecucionEnSerie({})({}).txt".format(confPreparadoVersEst[indice][6], nroMaquina, version)
     m = open(txt, "wt")
     m.close()
     encabezadoArchivoDeEjecucion(confGeneral, txt)

@@ -3,6 +3,7 @@
 """
 
 from Funciones.DeMenorNivel import *
+from datetime import datetime
 
 def truncarElementosArreglo(confGeneral):
     """
@@ -85,10 +86,29 @@ def cuerpoArchivoEjecucion(confGeneral, confVersEst, txt, nroMaquina):
     :param nroMaquina: Numero de la maquina que se va a preparar y exportar archivo correspondiente
     :return: None
     """
-    m = open(txt, "at")
+    # Se calcula el tiempo antes de corte, antes de 00 hs
     n = len(confVersEst)
+    now = datetime.now()
+    tiempoMaximo = (24 - now.hour) * 3600
+    tiempoCorrida = 0
+    indiceCorte = -1
+    tiempoDeCorte = 0
+
     for i in range(n):
         if(confVersEst[i][3] == "1" and confVersEst[i][2] == nroMaquina):
+            tiempoCorrida += confVersEst[i][4] + confGeneral[6]
+            if(tiempoCorrida >= tiempoMaximo):
+                indiceCorte = i - 1
+                tiempoDeCorte = tiempoCorrida - tiempoMaximo
+
+    m = open(txt, "at")
+    for i in range(n):
+        if(confVersEst[i][3] == "1" and confVersEst[i][2] == nroMaquina):
+            if(i == indiceCorte):
+                r = '\n\nCorte de corridas por limitacion de hora maxima. Tiempo de espera...\n' + \
+                    'timeout {}\n\n'.format(tiempoDeCorte)
+                m.write(r)
+
             if(confVersEst[i][6] == "1"):
                 if(confGeneral[7] == nroMaquina):
                     p = confGeneral[10]
