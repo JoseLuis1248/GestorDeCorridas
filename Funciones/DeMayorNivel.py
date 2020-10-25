@@ -21,7 +21,7 @@ def generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst, nroMa
         if(nroMaquina == confPreparadoVersEst[i][0]):
             indice = i
             break
-    txt = "{}\EjecucionEnSerie({})({}).txt".format(confPreparadoVersEst[indice][6], nroMaquina, version)
+    txt = "{}\Ejecucion({})({}).bat".format(confPreparadoVersEst[indice][6], nroMaquina, version)
     m = open(txt, "wt")
     m.close()
     encabezadoArchivoDeEjecucion(confGeneral, txt)
@@ -39,7 +39,7 @@ def generarArchivoDePreparadoPorVersion(confGeneral, confPreparadoVersEst, lista
         version = confGeneral[17]
     elif(confPreparadoVersEst[0][5] == "2"):
         version = confGeneral[18]
-    txt = "Exportacion/Preparacion({}).txt".format(version)
+    txt = "{}\Preparacion({}).bat".format(confGeneral[19], version)
     m = open(txt, "wt")
     m.close()
     encabezadoArchivoPreparado(txt)

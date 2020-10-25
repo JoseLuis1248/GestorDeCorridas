@@ -89,23 +89,24 @@ def cuerpoArchivoEjecucion(confGeneral, confVersEst, txt, nroMaquina):
     # Se calcula el tiempo antes de corte, antes de 00 hs
     n = len(confVersEst)
     now = datetime.now()
-    tiempoMaximo = (24 - now.hour) * 3600
+    tiempoMaximo = ((24 - now.hour) * 3600) - (now.minute * 60) - now.second
     tiempoCorrida = 0
     indiceCorte = -1
     tiempoDeCorte = 0
 
     for i in range(n):
         if(confVersEst[i][3] == "1" and confVersEst[i][2] == nroMaquina):
-            tiempoCorrida += confVersEst[i][4] + confGeneral[6]
-            if(tiempoCorrida >= tiempoMaximo):
-                indiceCorte = i - 1
-                tiempoDeCorte = tiempoCorrida - tiempoMaximo
+            if((tiempoCorrida + int(confVersEst[i][4]) + int(confGeneral[6]) >= tiempoMaximo)):
+                tiempoDeCorte = tiempoMaximo - tiempoCorrida
+                indiceCorte = i
+                break
+            tiempoCorrida += int(confVersEst[i][4]) + int(confGeneral[6])
 
     m = open(txt, "at")
     for i in range(n):
         if(confVersEst[i][3] == "1" and confVersEst[i][2] == nroMaquina):
             if(i == indiceCorte):
-                r = '\n\nCorte de corridas por limitacion de hora maxima. Tiempo de espera...\n' + \
+                r = '\nCorte de corridas por limitacion de hora maxima. Tiempo de espera...\n' + \
                     'timeout {}\n\n'.format(tiempoDeCorte)
                 m.write(r)
 

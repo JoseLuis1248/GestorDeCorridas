@@ -28,47 +28,33 @@ def main():
     ### Variables generales
     opcion = -1
     menu =  "\nMenu de opciones" + \
-            "\n1. Preparar entorno para: VERSION ESTABLE 1 ({}) - TODAS LAS MAQUINAS".format(confGeneral[17]) + \
-            "\n2. Preparar entorno para: VERSION ESTABLE 2 ({}) - TODAS LAS MAQUINAS".format(confGeneral[18]) + \
-            "\n3. Generar archivos por lotes: VERSION ESTABLE 1 ({}) - TODAS LAS MAQUINAS".format(confGeneral[17]) + \
-            "\n4. Generar archivos por lotes: VERSION ESTABLE 2 ({}) - TODAS LAS MAQUINAS".format(confGeneral[18]) + \
-            "\n5. Preparar entorno para: VERSION ESTABLE 1 ({}) - MAQUINAS INGRESADAS POR TECLADO".format(confGeneral[17]) + \
-            "\n6. Preparar entorno para: VERSION ESTABLE 2 ({}) - MAQUINAS INGRESADAS POR TECLADO".format(confGeneral[18]) + \
-            "\n7. Generar archivos por lotes: VERSION ESTABLE 1 ({}) - MAQUINAS INGRESADAS POR TECLADO".format(confGeneral[17]) + \
-            "\n8. Generar archivos por lotes: VERSION ESTABLE 2 ({}) - MAQUINAS INGRESADAS POR TECLADO".format(confGeneral[18]) + \
+            "\n1. Preparar entorno para: VERSION ESTABLE 1 ({}) - MAQUINAS INGRESADAS MANUALMENTE".format(confGeneral[17]) + \
+            "\n2. Preparar entorno para: VERSION ESTABLE 2 ({}) - MAQUINAS INGRESADAS MANUALMENTE".format(confGeneral[18]) + \
+            "\n3. Generar archivos por lotes: VERSION ESTABLE 1 ({}) - MAQUINAS INGRESADAS MANUALMENTE".format(confGeneral[17]) + \
+            "\n4. Generar archivos por lotes: VERSION ESTABLE 2 ({}) - MAQUINAS INGRESADAS MANUALMENTE".format(confGeneral[18]) + \
             "\n0. Finalizar programa"
 
     ### Inicio de programa - Menu de opciones
     while opcion != 0:
         print(menu)
-        opcion = validarCodigo(0, 8, "Ingrese una opcion de menu: ")
+        opcion = validarCodigo(0, 4, "Ingrese una opcion de menu: ")
 
         if(opcion == 0):
             input("Programa finalizado...")
         elif(opcion == 1):
-            generarArchivoDePreparadoPorVersion(confGeneral, confPreparadoVersEst1, listaMaquinas)
-        elif(opcion == 2):
-            generarArchivoDePreparadoPorVersion(confGeneral, confPreparadoVersEst2, listaMaquinas)
-        elif(opcion == 3):
-            for i in range(len(listaMaquinas)):
-                generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst1, listaMaquinas[i], confPreparadoVersEst1)
-        elif(opcion == 4):
-            for i in range(len(listaMaquinas)):
-                generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst2, listaMaquinas[i], confPreparadoVersEst2)
-        elif(opcion == 5):
             listaDeMaquinas = input("Ingrese la lista de maquinas a preparar (separadas por coma, si espacios): ")
             listaFormateada = obtenerInfoSeparadaPorComa(listaDeMaquinas)
             generarArchivoDePreparadoPorVersion(confGeneral, confPreparadoVersEst1, listaFormateada)
-        elif(opcion == 6):
+        elif(opcion == 2):
             listaDeMaquinas = input("Ingrese la lista de maquinas a preparar (separadas por coma, si espacios): ")
             listaFormateada = obtenerInfoSeparadaPorComa(listaDeMaquinas)
             generarArchivoDePreparadoPorVersion(confGeneral, confPreparadoVersEst2, listaFormateada)
-        elif(opcion == 7):
+        elif(opcion == 3):
             listaDeMaquinas = input("Ingrese la lista de maquinas a configurar ejecucion en serie (separadas por coma, si espacios): ")
             listaFormateada = obtenerInfoSeparadaPorComa(listaDeMaquinas)
             for i in range(len(listaFormateada)):
                 generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst1, listaFormateada[i], confPreparadoVersEst1)
-        elif(opcion == 8):
+        elif(opcion == 4):
             listaDeMaquinas = input("Ingrese la lista de maquinas a configurar ejecucion en serie (separadas por coma, si espacios): ")
             listaFormateada = obtenerInfoSeparadaPorComa(listaDeMaquinas)
             for i in range(len(listaFormateada)):
