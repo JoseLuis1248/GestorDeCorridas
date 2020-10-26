@@ -32,12 +32,13 @@ def main():
             "\n2. Preparar entorno para: VERSION ESTABLE 2 ({}) - MAQUINAS INGRESADAS MANUALMENTE".format(confGeneral[18]) + \
             "\n3. Generar archivos por lotes: VERSION ESTABLE 1 ({}) - MAQUINAS INGRESADAS MANUALMENTE".format(confGeneral[17]) + \
             "\n4. Generar archivos por lotes: VERSION ESTABLE 2 ({}) - MAQUINAS INGRESADAS MANUALMENTE".format(confGeneral[18]) + \
+            "\n5. Reiniciar configuraciones por cambio de archivos" + \
             "\n0. Finalizar programa"
 
     ### Inicio de programa - Menu de opciones
     while opcion != 0:
         print(menu)
-        opcion = validarCodigo(0, 4, "Ingrese una opcion de menu: ")
+        opcion = validarCodigo(0, 5, "Ingrese una opcion de menu: ")
 
         if(opcion == 0):
             input("Programa finalizado...")
@@ -59,6 +60,18 @@ def main():
             listaFormateada = obtenerInfoSeparadaPorComa(listaDeMaquinas)
             for i in range(len(listaFormateada)):
                 generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst2, listaFormateada[i], confPreparadoVersEst2)
+        elif(opcion == 5):
+            confGeneral = obtenerLineasDeArchivo("Configuraciones/confGeneral.txt")
+            truncarElementosArreglo(confGeneral)
+            confEjecucionVersEst1 = obtenerLineasDeArchivo("Configuraciones/confEjecucionVersEst1.txt")
+            convertirAMatriz(confEjecucionVersEst1)
+            confEjecucionVersEst2 = obtenerLineasDeArchivo("Configuraciones/confEjecucionVersEst2.txt")
+            convertirAMatriz(confEjecucionVersEst2)
+            confPreparadoVersEst1 = obtenerLineasDeArchivo("Configuraciones/confPreparadoVersEst1.txt")
+            convertirAMatriz(confPreparadoVersEst1)
+            confPreparadoVersEst2 = obtenerLineasDeArchivo("Configuraciones/confPreparadoVersEst2.txt")
+            convertirAMatriz(confPreparadoVersEst2)
+            print("Proceso finalizado correctamente.")
 
 if __name__ == '__main__':
     main()

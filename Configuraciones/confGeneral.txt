@@ -17,4 +17,4 @@ rutaCopiadoBasesDeDatosVersionEstable2=\\192.168.121.49\Disco D Server\RECURSOS_
 rutaCopiadoEjecutableVersionEstable2=\\192.168.121.49\Disco D Server\RECURSOS_TC\BASESDEDATOS_TC\03.30\ULTIMA VERSION\Ejecutable\
 versionEstable1=03.27
 versionEstable2=03.30
-rutaExportacionPreparadoEntorno=C:\Users\Jose.Beas\Desktop\
+rutaExportacionPreparadoEntorno=C:\Users\joseb\Desktop\
