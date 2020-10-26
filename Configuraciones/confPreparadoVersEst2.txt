@@ -1,6 +1,0 @@
-49,1,1,\\192.168.121.49\Disco D Server\RECURSOS_TC\BASESDEDATOS_TC,\\192.168.121.49\FlexxusERP\TEST COMPLETE\bin,2,C:\Users\joseb\Desktop\
-31,1,1,\\192.168.121.31\recursos_tc\BASESDEDATOS_TC,\\192.168.121.31\bin,2,C:\Users\joseb\Desktop\
-32,1,1,\\192.168.121.32\recursos_tc\BASESDEDATOS_TC,\\192.168.121.32\bin,2,C:\Users\joseb\Desktop\
-33,1,1,\\192.168.121.33\Disco Local_33\RECURSOS_TC\BASESDEDATOS_TC,\\192.168.121.33\bin,2,C:\Users\joseb\Desktop\
-130,1,1,\\192.168.121.130\d\RECURSOS_TC\BASESDEDATOS_TC,\\192.168.121.130\bin,2,C:\Users\joseb\Desktop\
-253,1,1,\\192.168.121.253\recursos_tc\BASESDEDATOS_TC,\\192.168.121.253\bin,2,C:\Users\joseb\Desktop\
