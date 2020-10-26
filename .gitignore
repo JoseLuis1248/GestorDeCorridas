@@ -1,2 +1,4 @@
 .idea/
 Configuraciones/
+Funciones/__pycache__/
+*.txt
