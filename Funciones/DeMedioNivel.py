@@ -65,9 +65,9 @@ def encabezadoArchivoDeEjecucion(confGeneral, txt):
         r += '\n'
     p = 'echo LA CONEXION REMOTA SE CERRARA...\n' + \
         'timeout {}\n'.format(confGeneral[3]) + \
-        'for /f "skip=1 tokens=3" %%s in ("query user servertesting")' + \
+        'for /f "skip=1 tokens=3" %%s in ' + "('query user servertesting')" + \
         ' do (%windir%\System32' + '\\' + 't' + 'scon.exe %%s /dest:console)\n' + \
-        'for /f "skip=1 tokens=3" %%s in ("query user testcomplete")' + \
+        'for /f "skip=1 tokens=3" %%s in ' + "('query user testcomplete')" + \
         ' do (%windir%\System32' + '\\' + 't' + 'scon.exe %%s /dest:console)\n' + \
         '\n'
     r += p
