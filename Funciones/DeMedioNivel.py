@@ -97,7 +97,7 @@ def cuerpoArchivoEjecucion(confGeneral, confVersEst, txt, nroMaquina):
     for i in range(n):
         if(confVersEst[i][3] == "1" and confVersEst[i][2] == nroMaquina):
             if((tiempoCorrida + int(confVersEst[i][4]) + int(confGeneral[6]) >= tiempoMaximo)):
-                tiempoDeCorte = tiempoMaximo - tiempoCorrida
+                tiempoDeCorte = tiempoMaximo - tiempoCorrida + 3600
                 indiceCorte = i
                 break
             tiempoCorrida += int(confVersEst[i][4]) + int(confGeneral[6])
@@ -187,4 +187,12 @@ def cuerpoArchivoPreparado(confGeneral, confPreparadoVersEst, txt, nroMaquina):
                 '\n'
         r += e
         m.write(r)
+    m.close()
+
+def pieArchivoPreparado(txt):
+    m = open(txt, "at")
+    r = 'echo LA PREPARACION DEL ENTORNO HA TERMINADO' + \
+        '\npause' + \
+        '\nexit'
+    m.write(r)
     m.close()

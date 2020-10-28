@@ -12,18 +12,13 @@ def main():
     :return: None
     """
     ### Carga en memoria de de los archivos de texto de configuraciones
-    confGeneral = obtenerLineasDeArchivo("Configuraciones/confGeneral.txt")
-    truncarElementosArreglo(confGeneral)
-    confEjecucionVersEst1 = obtenerLineasDeArchivo("Configuraciones/confEjecucionVersEst1.txt")
-    convertirAMatriz(confEjecucionVersEst1)
-    confEjecucionVersEst2 = obtenerLineasDeArchivo("Configuraciones/confEjecucionVersEst2.txt")
-    convertirAMatriz(confEjecucionVersEst2)
-    confPreparadoVersEst1 = obtenerLineasDeArchivo("Configuraciones/confPreparadoVersEst1.txt")
-    convertirAMatriz(confPreparadoVersEst1)
-    confPreparadoVersEst2 = obtenerLineasDeArchivo("Configuraciones/confPreparadoVersEst2.txt")
-    convertirAMatriz(confPreparadoVersEst2)
+    configuracion = cargarDatosSistema()
 
-    listaMaquinas = obtenerInfoSeparadaPorComa(confGeneral[12])
+    confGeneral = configuracion[0]
+    confEjecucionVersEst1 = configuracion[1]
+    confEjecucionVersEst2 = configuracion[2]
+    confPreparadoVersEst1 = configuracion[3]
+    confPreparadoVersEst2 = configuracion[4]
 
     ### Variables generales
     opcion = -1
@@ -61,16 +56,12 @@ def main():
             for i in range(len(listaFormateada)):
                 generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst2, listaFormateada[i], confPreparadoVersEst2)
         elif(opcion == 5):
-            confGeneral = obtenerLineasDeArchivo("Configuraciones/confGeneral.txt")
-            truncarElementosArreglo(confGeneral)
-            confEjecucionVersEst1 = obtenerLineasDeArchivo("Configuraciones/confEjecucionVersEst1.txt")
-            convertirAMatriz(confEjecucionVersEst1)
-            confEjecucionVersEst2 = obtenerLineasDeArchivo("Configuraciones/confEjecucionVersEst2.txt")
-            convertirAMatriz(confEjecucionVersEst2)
-            confPreparadoVersEst1 = obtenerLineasDeArchivo("Configuraciones/confPreparadoVersEst1.txt")
-            convertirAMatriz(confPreparadoVersEst1)
-            confPreparadoVersEst2 = obtenerLineasDeArchivo("Configuraciones/confPreparadoVersEst2.txt")
-            convertirAMatriz(confPreparadoVersEst2)
+            configuracion = cargarDatosSistema()
+            confGeneral = configuracion[0]
+            confEjecucionVersEst1 = configuracion[1]
+            confEjecucionVersEst2 = configuracion[2]
+            confPreparadoVersEst1 = configuracion[3]
+            confPreparadoVersEst2 = configuracion[4]
             print("Proceso finalizado correctamente.")
 
 if __name__ == '__main__':

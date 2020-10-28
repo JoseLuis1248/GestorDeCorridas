@@ -46,3 +46,18 @@ def generarArchivoDePreparadoPorVersion(confGeneral, confPreparadoVersEst, lista
     n = len(listaMaquinas)
     for i in range(n):
         cuerpoArchivoPreparado(confGeneral, confPreparadoVersEst, txt, listaMaquinas[i])
+    pieArchivoPreparado(txt)
+
+def cargarDatosSistema():
+    confGeneral = obtenerLineasDeArchivo("Configuraciones/confGeneral.txt")
+    truncarElementosArreglo(confGeneral)
+    confEjecucionVersEst1 = obtenerLineasDeArchivo("Configuraciones/confEjecucionVersEst1.txt")
+    convertirAMatriz(confEjecucionVersEst1)
+    confEjecucionVersEst2 = obtenerLineasDeArchivo("Configuraciones/confEjecucionVersEst2.txt")
+    convertirAMatriz(confEjecucionVersEst2)
+    confPreparadoVersEst1 = obtenerLineasDeArchivo("Configuraciones/confPreparadoVersEst1.txt")
+    convertirAMatriz(confPreparadoVersEst1)
+    confPreparadoVersEst2 = obtenerLineasDeArchivo("Configuraciones/confPreparadoVersEst2.txt")
+    convertirAMatriz(confPreparadoVersEst2)
+
+    return[confGeneral, confEjecucionVersEst1, confEjecucionVersEst2, confPreparadoVersEst1, confPreparadoVersEst2]
