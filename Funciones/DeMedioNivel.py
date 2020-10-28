@@ -124,7 +124,7 @@ def cuerpoArchivoEjecucion(confGeneral, confVersEst, txt, nroMaquina):
                 '"{}" "{}" /r '.format(confGeneral[4], confVersEst[i][5]) + \
                 '/p:{} /e /SilentMode /Timeout:{}'.format(confVersEst[i][1], confVersEst[i][4]) + \
                 ' /ExportLog:"{}{}'.format(p, confVersEst[i][0].upper()) + \
-                '-{}({}).mht"\n'.format(confVersEst[i][1].upper(), confVersEst[i][2]) + \
+                '-{}({}).mht"\n'.format(confVersEst[i][1], confVersEst[i][2]) + \
                 '\n' + \
                 'echo TIEMPO DE ESPERA ENTRE CORRIDA\n' + \
                 'timeout {}\n'.format(confGeneral[6])
