@@ -26,6 +26,8 @@ def generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst, nroMa
     m.close()
     encabezadoArchivoDeEjecucion(confGeneral, txt)
     cuerpoArchivoEjecucion(confGeneral, confEjecucionVersEst, txt, nroMaquina)
+    pieArchivoEjecucion(confGeneral, confEjecucionVersEst, txt, nroMaquina)
+
 
 def generarArchivoDePreparadoPorVersion(confGeneral, confPreparadoVersEst, listaMaquinas):
     """

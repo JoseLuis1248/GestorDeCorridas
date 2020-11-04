@@ -86,30 +86,11 @@ def cuerpoArchivoEjecucion(confGeneral, confVersEst, txt, nroMaquina):
     :param nroMaquina: Numero de la maquina que se va a preparar y exportar archivo correspondiente
     :return: None
     """
-    # Se calcula el tiempo antes de corte, antes de 00 hs
     n = len(confVersEst)
-    now = datetime.now()
-    tiempoMaximo = ((24 - now.hour) * 3600) - (now.minute * 60) - now.second
-    tiempoCorrida = 0
-    indiceCorte = -1
-    tiempoDeCorte = 0
-
-    for i in range(n):
-        if(confVersEst[i][3] == "1" and confVersEst[i][2] == nroMaquina):
-            if((tiempoCorrida + int(confVersEst[i][4]) + int(confGeneral[6]) >= tiempoMaximo)):
-                tiempoDeCorte = tiempoMaximo - tiempoCorrida + 3600
-                indiceCorte = i
-                break
-            tiempoCorrida += int(confVersEst[i][4]) + int(confGeneral[6])
 
     m = open(txt, "at")
     for i in range(n):
         if(confVersEst[i][3] == "1" and confVersEst[i][2] == nroMaquina):
-            if(i == indiceCorte):
-                r = '\nCorte de corridas por limitacion de hora maxima. Tiempo de espera...\n' + \
-                    'timeout {}\n\n'.format(tiempoDeCorte)
-                m.write(r)
-
             if(confVersEst[i][6] == "1"):
                 if(confGeneral[7] == nroMaquina):
                     p = confGeneral[10]
@@ -128,17 +109,32 @@ def cuerpoArchivoEjecucion(confGeneral, confVersEst, txt, nroMaquina):
                 '\n' + \
                 'echo TIEMPO DE ESPERA ENTRE CORRIDA\n' + \
                 'timeout {}\n'.format(confGeneral[6])
-            procesos = obtenerInfoSeparadaPorComa(confGeneral[5])
-            for i in range(len(procesos)):
-                p = 'echo CERRANDO PROCESO: {}\n'.format(procesos[i].upper()) + \
-                    'TASKKILL /IM "{}" /F /T\n'.format(procesos[i])
-                r += p
-            r += 'echo DESCOMPRIMIENDO BASE DE DATOS COMUN\n' + \
-                '"C:\Program Files\WinRAR\WinRAR.exe" x -o+ ' + \
-                '"D:\RECURSOS_TC\BASESDEDATOS_TC\Inicial.rar" ' + \
-                '"D:\RECURSOS_TC\BASESDEDATOS_TC"\n' + \
-                '\n'
+
+            if(confVersEst[i][7] == "1"):
+                procesos = obtenerInfoSeparadaPorComa(confGeneral[5])
+                for i in range(len(procesos)):
+                    p = 'echo CERRANDO PROCESO: {}\n'.format(procesos[i].upper()) + \
+                        'TASKKILL /IM "{}" /F /T\n'.format(procesos[i])
+                    r += p
+                r += 'echo DESCOMPRIMIENDO BASE DE DATOS COMUN\n' + \
+                    '"C:\Program Files\WinRAR\WinRAR.exe" x -o+ ' + \
+                    '"D:\RECURSOS_TC\BASESDEDATOS_TC\Inicial.rar" ' + \
+                    '"D:\RECURSOS_TC\BASESDEDATOS_TC"\n' + \
+                    '\n'
             m.write(r)
+    m.close()
+
+def pieArchivoEjecucion(confGeneral, confEjecucionVersEst, txt, nroMaquina):
+    if(confEjecucionVersEst[0][6] == "1"):
+        p = confGeneral[20]
+    elif(confEjecucionVersEst[0][6] == "2"):
+        p = confGeneral[21]
+
+    r = 'echo SE EXPORTA ARCHIVO DE TERMINACION DE CORRIDAS\n' + \
+        'Net View > "{}MAQUINA IP {} - EJECUCION FINALIZADA"\n'.format(p, nroMaquina) + \
+        '\nEXIT\n'
+    m = open(txt, "at")
+    m.write(r)
     m.close()
 
 def encabezadoArchivoPreparado(txt):
