@@ -1,6 +1,8 @@
 """
-El paquete contiene módulos diseñados para la carga de datos y validación de los mismos.
+El paquete contiene módulos de funciones de 3 niveles. El nivel superior usa funciones de niveles anteriores.
 
 Lista de módulos incluidos:
+:DeMayorNivel
+:DeMedioNivel
+:DeMenorNivel
 """
-__author__ = 'Grupo:77371,89208,89201'

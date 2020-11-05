@@ -1,7 +1,8 @@
 """
 MODULO EJECUTABLE: Este módulo contiene la definición de 'main', función que ejecuta el programa principal
 
-Lista de funciones incluidos:
+Lista de funciones incluidas:
+:main(): Función principal cuyo objetivo es desplegar el menú de opciones al usuario.
 """
 
 from Funciones.DeMayorNivel import *
@@ -13,7 +14,6 @@ def main():
     """
     ### Carga en memoria de de los archivos de texto de configuraciones
     configuracion = cargarDatosSistema()
-
     confGeneral = configuracion[0]
     confEjecucionVersEst1 = configuracion[1]
     confEjecucionVersEst2 = configuracion[2]
