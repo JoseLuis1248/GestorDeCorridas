@@ -16,16 +16,25 @@ por coma en un arreglo
 
 def validarCodigo(min, max, mensaje):
     """
-    Ésta funcion valida el ingreso de un numero por pantalla
+    Ésta funcion valida el ingreso de un numero por pantalla. Valida que lo ingresado sea un numero primero.
     :param min: Minimo aceptable para el ingreso del numero
     :param max: Maximo aceptable para el ingreso del numero
     :param mensaje: Mensaje entregado al usuario para ingresar el numero
     :return: El valor ingresado por el usuario, validodo entre los margenes
     """
-    codigo = int(input(mensaje))
-    while(codigo < min or codigo > max):
-        codigo = int(input("Codigo ingresado incorrecto, debe ser >= " + str(min) + " y <= " + str(max) + ": "))
-    return codigo
+    while(True):
+        codigo = input(mensaje)
+        ### En el siguiente bloque try-catch se valida que lo ingresado sea un numero
+        try:
+            codigo = int(codigo)
+            ### En el siguiente bloque se valida que el numero ingresado esté dentro de los limites
+            while(codigo < min or codigo > max):
+                codigo = int(input("Codigo ingresado incorrecto, debe ser >= " + str(min) + " y <= " + str(max) + ": "))
+            return codigo
+
+        except ValueError:
+            print ("La entrada es incorrecta; debe escribir un numero entero")
+
 
 def formatearCadena(cadenaCompleta):
     """
