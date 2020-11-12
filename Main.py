@@ -46,20 +46,20 @@ def main():
         if(opcion == 0):
             input("Programa finalizado...")
         elif(opcion == 1):
-            listaDeMaquinas = input("Ingrese la lista de maquinas a preparar (separadas por coma, si espacios): ")
+            listaDeMaquinas = input("Ingrese la lista de maquinas a preparar (separadas por coma, sin espacios): ")
             listaFormateada = obtenerInfoSeparadaPorComa(listaDeMaquinas)
             generarArchivoDePreparadoPorVersion(confGeneral, confPreparadoVersEst1, listaFormateada)
         elif(opcion == 2):
-            listaDeMaquinas = input("Ingrese la lista de maquinas a preparar (separadas por coma, si espacios): ")
+            listaDeMaquinas = input("Ingrese la lista de maquinas a preparar (separadas por coma, sin espacios): ")
             listaFormateada = obtenerInfoSeparadaPorComa(listaDeMaquinas)
             generarArchivoDePreparadoPorVersion(confGeneral, confPreparadoVersEst2, listaFormateada)
         elif(opcion == 3):
-            listaDeMaquinas = input("Ingrese la lista de maquinas a configurar ejecucion en serie (separadas por coma, si espacios): ")
+            listaDeMaquinas = input("Ingrese la lista de maquinas a configurar ejecucion en serie (separadas por coma, sin espacios): ")
             listaFormateada = obtenerInfoSeparadaPorComa(listaDeMaquinas)
             for i in range(len(listaFormateada)):
                 generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst1, listaFormateada[i], confPreparadoVersEst1)
         elif(opcion == 4):
-            listaDeMaquinas = input("Ingrese la lista de maquinas a configurar ejecucion en serie (separadas por coma, si espacios): ")
+            listaDeMaquinas = input("Ingrese la lista de maquinas a configurar ejecucion en serie (separadas por coma, sin espacios): ")
             listaFormateada = obtenerInfoSeparadaPorComa(listaDeMaquinas)
             for i in range(len(listaFormateada)):
                 generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst2, listaFormateada[i], confPreparadoVersEst2)
