@@ -25,6 +25,10 @@ de preparacion de entorno
 el cuerpo del archivo por lotes de preparado de entorno
 
 :pieArchivoPreparado(txt): Se escribe el pie de archivo por lotes de preparado de entorno
+
+:encabezadoArchivoEstadistica(txt): Ésta función escribe el encabezado de un archivo de estadistica
+
+:pieArchivoEstadistica(txt):Ésta función escribe el pie de un archivo de estadistica
 """
 
 from Funciones.DeMenorNivel import *
@@ -283,5 +287,72 @@ def pieArchivoPreparado(txt):
     r = 'echo LA PREPARACION DEL ENTORNO HA TERMINADO' + \
         '\npause' + \
         '\nexit'
+    m.write(r)
+    m.close()
+
+def encabezadoArchivoEstadistica(txt):
+    """
+    Ésta función escribe el encabezado de un archivo de estadistica a partir de un formato estandar
+    :param txt: El txt donde se va a escribir el encabezado
+    :return:
+    """
+    ### En el siguiente bloque se abre el archivo en modo escritura al final (at), se escribe y se cierra
+    r = "=" * 100 + \
+        "\n{:^100}".format("PLANIFICACION DE CORRIDAS DE TEST EXECUTE") + \
+        "\n" + "=" * 100 + \
+        "\n" + \
+        "{:<5}{:<10}{:<15}".format("IP", "Cantidad", "Duracion T") + \
+        "{:<30}".format("Orden y tiempos de corrida") + \
+        "\n"
+    m = open(txt, "at")
+    m.write(r)
+    m.close()
+
+def cuerpoArchivoEstadistica(confGeneral, confPreparadoVersEst, txt, nroMaquina):
+    """
+    Ésta función escribe el cuerpo de un archivo de estadistica, es decir, escribe en un txt
+    toda la informacion de cada maquina y los proyectos que corre junto con sus tiempos
+    de ejecucion
+    :param confGeneral: Arreglo con la informacion de configuracion general
+    :param confPreparadoVersEst: Matriz de n x m con la informacion de proyectos por version
+    :param txt: Documento donde se escribirá la información
+    :param nroMaquina: Numero de máquina seleccionada para informar estadistica
+    :return:
+    """
+    ### En el siguiente bloque se abre el archivo txt en modo de escritura al final (at)
+    m = open(txt, "at")
+    n = len(confPreparadoVersEst)
+    tiempoTotal = 0
+    cantidadProyectos = 0
+    detalleProyectos = ""
+
+    for i in range(n):
+        if(confPreparadoVersEst[i][2] == nroMaquina):
+            tiempoTotal += int(confPreparadoVersEst[i][4])
+            cantidadProyectos += 1
+            tiempoIndividual = int(confPreparadoVersEst[i][4])
+            tiempoIndividualFormateado = formatearTiempo(tiempoIndividual)
+
+            detalleProyectos += confPreparadoVersEst[i][1] + \
+                                '({})'.format(tiempoIndividualFormateado) + \
+                                '     '
+
+    tiempoTotalFormateado = formatearTiempo(tiempoTotal)
+    r = '{:<5}{:<10}{:<15}'.format(nroMaquina, str(cantidadProyectos), tiempoTotalFormateado) + \
+        detalleProyectos + \
+        '\n'
+
+    m.write(r)
+    m.close()
+
+def pieArchivoEstadistica(txt):
+    """
+    Ésta función escribe el pie de un archivo de estadística en función de un estandar.
+    :param txt: Documento donde se escribirá la información
+    :return:
+    """
+    r = '\n*El tiempo total por máquina NO TIENE EN CUENTA la suma de los tiempos establecidos ENTRE EJECUCIONES de proyectos.\n' + \
+        '*Los tiempos individuales de cada proyecto SON LOS TIEMPOS MÁXIMOS DADOS para los mismos, es decir, representan una cota superior del tiempo real.\n'
+    m = open(txt, "at")
     m.write(r)
     m.close()

@@ -12,6 +12,8 @@ salto de linea de un archivo de texto identificados como "\n"
 
 :obtenerInfoSeparadaPorComa(cadena): Ésta función tranforma una linea de texto con parametros separados
 por coma en un arreglo
+
+:formatearTiempo(tiempoTotal): Ésta función formatea un tiempo dado en segundos a horas y minutos
 """
 
 def validarCodigo(min, max, mensaje):
@@ -99,3 +101,28 @@ def obtenerInfoSeparadaPorComa(cadena):
             palabra += c
     informacion.append(palabra)
     return informacion
+
+def formatearTiempo(tiempoTotal):
+    """
+    Ésta función tiene dos objetivos: traducir un tiempo de segundos a formato "horas:minutos" y
+    ademas retornar un string con el formato "hh:mm"
+    :param tiempoTotal: El tiempo en segundos a formatear
+    :return: string con formato de hh:mm
+    """
+    horas = tiempoTotal // 3600
+    if(horas > 0):
+        tiempoTotal = tiempoTotal - (3600 * horas)
+    minutos = tiempoTotal // 60
+
+    if(horas >= 0 and horas < 10):
+        horasFormateado = "0" + str(horas)
+    else:
+        horasFormateado = str(horas)
+
+    if(minutos >= 0 and minutos < 10):
+        minutosFormateado = "0" + str(minutos)
+    else:
+        minutosFormateado = str(minutos)
+
+    r = "{:<2}:{:<2}".format(horasFormateado, minutosFormateado)
+    return r

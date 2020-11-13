@@ -23,7 +23,7 @@ def main():
     ### Variables generales
     opcion = -1
     menu =  "\n" + "=" * 100 + \
-            "\n{:^90}".format("PROGRAMA GESTOR DE CORRIDAS DE TEST EXECUTE") + \
+            "\n{:^100}".format("PROGRAMA GESTOR DE CORRIDAS DE TEST EXECUTE") + \
             "\n" + "=" * 100 + \
             "\nOPCIONES DE PREPARADO DE ENTORNO" + \
             "\n1. VERSION ESTABLE 1 ({}) - MAQUINAS INGRESADAS MANUALMENTE".format(confGeneral[17]) + \
@@ -36,12 +36,13 @@ def main():
             "\nOPCIONES GENERALES DE UTILIDAD" + \
             "\n5. Reiniciar configuraciones por cambio de archivos de texto parametrizables" + \
             "\n6. Generar archivos de ejecución en serie para todas las maquinas y todas las versiones" + \
+            "\n7. Generar archivos de estadísticas de tiempos de ejecucion por maquina y versión" + \
             "\n0. Finalizar programa"
 
     ### Inicio de programa - Menu de opciones
     while opcion != 0:
         print(menu)
-        opcion = validarCodigo(0, 6, "Ingrese una opcion de menu: ")
+        opcion = validarCodigo(0, 7, "Ingrese una opcion de menu: ")
 
         if(opcion == 0):
             input("Programa finalizado...")
@@ -78,6 +79,11 @@ def main():
                 generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst1, listaFormateada[i], confPreparadoVersEst1)
             for i in range(len(listaFormateada)):
                 generarArchivoDeProyectosPorMaquina(confGeneral, confEjecucionVersEst2, listaFormateada[i], confPreparadoVersEst2)
+        elif(opcion == 7):
+            listaDeMaquinas = confGeneral[12]
+            listaFormateada = obtenerInfoSeparadaPorComa(listaDeMaquinas)
+            generarArchivoEstadisticaPorVersion(confGeneral, confEjecucionVersEst1, listaFormateada)
+            generarArchivoEstadisticaPorVersion(confGeneral, confEjecucionVersEst2, listaFormateada)
 
 if __name__ == '__main__':
     main()

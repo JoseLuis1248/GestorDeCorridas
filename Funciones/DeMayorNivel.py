@@ -11,6 +11,9 @@ de crear un archivo por lotes de ejecución de preparación de entorno
 
 :cargarDatosSistema(): Ésta función se encarga de reiniciar los arreglos, matrices locales dados en función
 de la parametrización de los archivos de texto
+
+:generarArchivoEstadisticaPorVersion(confGeneral, confEjecucionVersEst, listaMaquinas): Ésta función se encarga
+de exportar archivos de estadísticas por máquina y por versión
 """
 
 from Funciones.DeMedioNivel import *
@@ -81,6 +84,11 @@ def generarArchivoDePreparadoPorVersion(confGeneral, confPreparadoVersEst, lista
 
 
 def cargarDatosSistema():
+    """
+    Ésta función REINICIA las variables correspondientes a los arreglos de información a partir de los archivos
+    de texto de configuración
+    :return:
+    """
     confGeneral = obtenerLineasDeArchivo("Configuraciones/confGeneral.txt")
     truncarElementosArreglo(confGeneral)
     confEjecucionVersEst1 = obtenerLineasDeArchivo("Configuraciones/confEjecucionVersEst1.txt")
@@ -93,3 +101,33 @@ def cargarDatosSistema():
     convertirAMatriz(confPreparadoVersEst2)
 
     return[confGeneral, confEjecucionVersEst1, confEjecucionVersEst2, confPreparadoVersEst1, confPreparadoVersEst2]
+
+def generarArchivoEstadisticaPorVersion(confGeneral, confEjecucionVersEst, listaMaquinas):
+    """
+    Ésta función se encarga de generar archivos de texto con la información de proyectos por versión
+    y por máquina, incluyendo tiempos individuales y totales
+    :param confGeneral: Arreglo con la información de la configuración general
+    :param confEjecucionVersEst: Matriz de n x m con la información por versión
+    :param listaMaquinas: Lista de máquinas a informar en la estadística
+    :return:
+    """
+    ### En la siguiente estructura se establece que version estable es la que se prepara, para conocer su nombre
+    if(confEjecucionVersEst[0][6] == "1"):
+        # Según el numero de version estable, se crea variable que establece el nombre de la version
+        version = confGeneral[17]
+    elif(confEjecucionVersEst[0][6] == "2"):
+        # Según el numero de version estable, se crea variable que establece el nombre de la version
+        version = confGeneral[18]
+
+    ### En la siguiente estructura se crea el archivo aunque no exista; esto es por el modo de apartura "wt"
+    txt = "{}\EstadisticaPorMaquina({}).txt".format(confGeneral[19], version)
+    m = open(txt, "wt")
+    m.close()
+
+    ### En las siguientes lineas se crea el archivo, el encabezado primero, cuerpo y pie despues
+    encabezadoArchivoEstadistica(txt)
+    n = len(listaMaquinas)
+    ### En la siguiente estructura, se agrega al cuerpo del archivo cuantas maquinas hayan para analizar
+    for i in range(n):
+        cuerpoArchivoEstadistica(confGeneral, confEjecucionVersEst, txt, listaMaquinas[i])
+    pieArchivoEstadistica(txt)
